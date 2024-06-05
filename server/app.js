@@ -2,14 +2,15 @@ import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import cors from "cors";
-import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 
-const secretKeyJWT = "asdasdsadasdasdasdsa";
 const port = 3000;
 
 const app = express();
 const server = createServer(app);
+
+var chatData = []
+var rooms = []
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
@@ -30,39 +31,24 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/login", (req, res) => {
-  const token = jwt.sign({ _id: "asdasjdhkasdasdas" }, secretKeyJWT);
+app.get("/data", (req, res)=>{
+  res.json({data:chatData, rooms:rooms});
+})
 
-  res
-    .cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" })
-    .json({
-      message: "Login Success",
-    });
-});
-
-io.use((socket, next) => {
-  cookieParser()(socket.request, socket.request.res, (err) => {
-    if (err) return next(err);
-
-    const token = socket.request.cookies.token;
-    if (!token) return next(new Error("Authentication Error"));
-
-    const decoded = jwt.verify(token, secretKeyJWT);
-    next();
-  });
-});
 
 io.on("connection", (socket) => {
   console.log("User Connected", socket.id);
 
-  socket.on("message", ({ room, message }) => {
-    console.log({ room, message });
-    socket.to(room).emit("receive-message", message);
+  socket.on("message", ({user, userId, room, message }) => {
+    console.log({user:user, userId, room, message });
+    chatData = [...chatData , {user,userId, room, message }];
+    socket.broadcast.emit("receive-message", {user,userId,room, message});
   });
 
-  socket.on("join-room", (room) => {
-    socket.join(room);
-    console.log(`User joined room ${room}`);
+  socket.on("create-room", (room) => {
+    console.log(room);
+    rooms = [...rooms, room]
+    socket.broadcast.emit('get-rooms', room)
   });
 
   socket.on("disconnect", () => {

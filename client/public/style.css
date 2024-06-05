@@ -1,0 +1,172 @@
+body{
+    margin: 0;
+    background-color:#4b92db;
+    overflow: hidden;
+}
+hr{
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #003399;
+}
+
+.room{
+    width: 79vw;
+    height: 98vh;
+    background-color: azure;
+    float: right;
+    border-radius: 10px;
+    color:#003399;
+}
+
+.scroll{
+    overflow:auto;
+}
+.scroll::-webkit-scrollbar{
+    width: 5px;
+}
+.scroll::-webkit-scrollbar-thumb{
+    background-color: #003399;
+    border-radius: 5px;
+}
+
+.side-nav{
+    width: 20vw;
+    min-height: 95vh;
+    background-color:#4b92db;
+    float: left;
+    border-radius: 10px;
+    padding-bottom: 2vh;
+}
+
+.side-nav h1{
+    color: #003399;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.nav-room{
+    border-radius: 10px;
+    background-color: azure;
+    color: #4b92db;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.nav-room p{
+    background-color: azure;
+}
+
+.nav-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20vw;
+    height: 65vh;
+}
+
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: inherit;
+    height: 40vh;
+}
+
+.senders{
+    align-self: flex-start;
+}
+
+.chats{
+    height: 70vh;
+    width: inherit;
+}
+
+.users{
+   align-self: flex-end;
+}
+
+.indi-chat{
+    min-width: 100px;
+    max-width: 300px;
+    word-wrap: break-word;
+    background-color: #4b92db;
+    color: azure;
+    border-radius: 10px;
+}
+.indi-chat h3{
+    background-color: #4b92db;
+    padding: 0 4px;
+    margin: 0 0 10px 0;
+}
+
+.indi-chat p{
+    margin: 1px 0;
+    padding: 0 4px;
+    font-size: small;
+    text-decoration: #003399 underline
+}
+
+.form{
+    margin-top: 10px;
+    margin-left: 10px;
+    justify-content: end;
+}
+
+.form textarea {
+    width: 110vh;
+    height: 45px;
+    border-color: #003399;
+    border-radius: 10px;
+    resize: none;
+    font-size: large;
+    padding: 5px;
+  }
+  
+  button {
+    padding: 0;
+    border: none;
+    padding-bottom: 3px;
+    border-radius: 10px;
+    background-color: #003399;
+  }
+  button span {
+    background: #003399;
+    color: azure;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+
+  .user-form{
+    width: inherit;
+    height: 100vh;
+    background-color: #4b92db;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+  }
+.user-form label{
+    color: azure;
+    font-size: larger;
+}
+.user-form input{
+    width:200px;
+    font-size: large;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.create-room{
+    width: inherit;
+    margin-top: 10px;
+}
